@@ -41,8 +41,6 @@ regressor.fit(X_train, y_train)
 #Predicting the results
 y_pred=regressor.predict(X_test)
 
-
-
 #Building the optimal model using backward elimination with signifcant level as 0.05(5%)
 import statsmodels.formula.api as sm
 X=np.append(arr=np.ones((85,1)).astype(int),values=X, axis=1)
@@ -78,6 +76,7 @@ regressor_OLS.summary()
 X_opt=X[:,[0,1,2,4,6,7,10,11]]
 regressor_OLS=sm.OLS(endog=y,exog=X_opt).fit()
 regressor_OLS.summary()
+
 #x1=(index=1)=chocolate
 #x2=(index=2)=fruity
 #x3=(index=4)=peanutyalmondy
@@ -88,3 +87,9 @@ regressor_OLS.summary()
 
 # From the cofficient value it can be derived that price and hard has negative corelation with win percentage. So these substances need to be avioded.
 # chocolate, fruity,peanutyalomdy, crispedricewater has positive relation with win percentage so a candy with this behaviour can create more value for customer.
+#Predicting the results
+X_train=X_train[:,[0,1,3,5,6,9,10]]
+X_test=X_test[:,[0,1,3,5,6,9,10]]
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+y_pred_newmodel=regressor.predict(X_test)
